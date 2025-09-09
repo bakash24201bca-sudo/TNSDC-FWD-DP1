@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ticket Reservation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #facc15;
+    }
+    .container {
+      width: 500px;
+      margin: auto;
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .movie-select, .info {
+      margin: 20px 0;
+    }
+    .seats {
+      display: grid;
+      grid-template-columns: repeat(8, 40px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .seat {
+      width: 40px;
+      height: 40px;
+      background: #444;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .seat.selected {
+      background: #22c55e;
+    }
+    .seat.booked {
+      background: #e11d48;
+      cursor: not-allowed;
+    }
+    .screen {
+      background: #fff;
+      height: 30px;
+      margin: 15px auto;
+      width: 80%;
+      border-radius: 5px;
+    }
+    button {
+      background: #facc15;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #eab308;
+    }
+    .result {
+      margin-top: 20px;
+      background: #333;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 Movie Ticket Reservation</h1>
+
+  <div class="container">
+    <div class="movie-select">
+      <label for="movie">Select Movie:</label>
+      <select id="movie">
+        <option value="Avengers">Avengers: Endgame</option>
+        <option value="KGF">KGF Chapter 2</option>
+        <option value="Stranger Things">Stranger Things</option>
+        <option value="Jawan">Jawan</option>
+      </select>
+    </div>
+
+    <div class="screen">SCREEN</div>
+
+    <div class="seats">
+      <!-- 8x5 grid of seats -->
+      <div class="seat"></div><div class="seat"></div><div class="seat booked"></div><div class="seat"></div>
+      <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+
+      <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat booked"></div>
+      <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+
+      <div class="seat booked"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+      <div class="seat"></div><div class="seat"></div><div class="seat booked"></div><div class="seat"></div>
+
+      <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+      <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+
+      <div class="seat"></div><div class="seat booked"></div><div class="seat"></div><div class="seat"></div>
+      <div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div>
+    </div>
+
+    <button onclick="bookTickets()">Confirm Reservation</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const seats = document.querySelectorAll(".seat:not(.booked)");
+    const resultBox = document.getElementById("result");
+
+    seats.forEach(seat => {
+      seat.addEventListener("click", () => {
+        seat.classList.toggle("selected");
+      });
+    });
+
+    function bookTickets() {
+      const selectedSeats = document.querySelectorAll(".seat.selected");
+      const movie = document.getElementById("movie").value;
+
+      if (selectedSeats.length === 0) {
+        alert("Please select at least one seat!");
+        return;
+      }
+
+      let seatNumbers = [];
+      selectedSeats.forEach((seat, index) => {
+        seatNumbers.push("Seat " + (index + 1));
+        seat.classList.remove("selected");
+        seat.classList.add("booked");
+      });
+
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `
+        <h3>✅ Reservation Confirmed!</h3>
+        <p><strong>Movie:</strong> ${movie}</p>
+        <p><strong>Seats:</strong> ${seatNumbers.join(", ")}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

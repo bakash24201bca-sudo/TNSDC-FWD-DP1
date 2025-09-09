@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Movie Ticket Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #facc15;
+    }
+    .form-box {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: #facc15;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #eab308;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #333;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 Online Movie Ticket Booking</h1>
+
+  <div class="form-box">
+    <label for="movie">Select Movie:</label>
+    <select id="movie">
+      <option value="Avengers">Avengers: Endgame</option>
+      <option value="KGF">KGF Chapter 2</option>
+      <option value="Leo">Leo</option>
+      <option value="Jawan">Jawan</option>
+    </select>
+
+    <label for="time">Select Show Time:</label>
+    <select id="time">
+      <option value="10:00 AM">10:00 AM</option>
+      <option value="1:00 PM">1:00 PM</option>
+      <option value="4:00 PM">4:00 PM</option>
+      <option value="8:00 PM">8:00 PM</option>
+    </select>
+
+    <label for="seats">Number of Tickets:</label>
+    <input type="number" id="seats" min="1" max="10" value="1">
+
+    <button onclick="bookTicket()">Book Now</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function bookTicket() {
+      const movie = document.getElementById("movie").value;
+      const time = document.getElementById("time").value;
+      const seats = document.getElementById("seats").value;
+
+      const resultBox = document.getElementById("result");
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `<h3>✅ Booking Confirmed!</h3>
+        <p><strong>Movie:</strong> ${movie}</p>
+        <p><strong>Show Time:</strong> ${time}</p>
+        <p><strong>Tickets:</strong> ${seats}</p>`;
+    }
+  </script>
+</body>
+</html>
